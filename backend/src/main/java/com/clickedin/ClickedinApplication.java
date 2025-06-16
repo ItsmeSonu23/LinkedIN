@@ -1,4 +1,4 @@
-package com.clickedin.clickedin;
+package com.clickedin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
