@@ -32,6 +32,10 @@ public class AuthenticationController {
         return authenticationService.getUser("sonumish3180@gmail.com");
     }
 
+    public AuthenticationResponseBody loginPage(@Valid @RequestBody AuthenticationRequestBody loginRequestBody){
+        return authenticationService.login(loginRequestBody);
+    }
+
 
     @PostMapping("/register")
     public AuthenticationResponseBody registerPage(@Valid @RequestBody AuthenticationRequestBody registerRequestBody) {
