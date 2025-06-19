@@ -1,5 +1,7 @@
 package com.clickedin.features.authentication.model;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -25,8 +27,13 @@ public class AuthenticationUser {
     @Email
     @Column(unique = true)
     private String email;
+    private Boolean emailVerified=false;
+    private String emailVerificationToken = null;
+    private LocalDateTime emailVerificationTokenExpiryDate = null;
     @JsonIgnore
     private String password;
+    private String passwordResetToken=null;
+    private LocalDateTime passwordResetTokenExpiryDate = null;
 
     public AuthenticationUser(String email, String password) {
         this.email = email;
