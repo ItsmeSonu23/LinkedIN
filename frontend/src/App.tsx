@@ -12,10 +12,6 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
-        element: <Feed />,
-      },
-      {
         path: "/login",
         element: <Login />,
       },
@@ -32,6 +28,9 @@ const router = createBrowserRouter([
         element: <VerifyEmail />,
       },
     ]
+  },{
+    path: "/home",
+    element: <Feed />,
   }
 ])
 
