@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@theme {
+  --animate-slider: slide 1s infinite alternate;
+  @keyframes slide {
+    0% {
+      transform:translateX(0rem);
+    }
+    100% {
+        transform:translateX(6rem);
+    }
+  }
+}

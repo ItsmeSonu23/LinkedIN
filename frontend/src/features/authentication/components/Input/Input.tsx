@@ -4,7 +4,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & { label: string }
 
 export const Input = ({ label, ...rest }: InputProps) => {
     return (
-        <div className="grid gap-2 my-4">
+        <div className="grid gap-2 my-2">
             <label>{label}</label>
             <input
                 {...rest}

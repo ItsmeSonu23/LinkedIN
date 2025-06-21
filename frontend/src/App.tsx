@@ -5,32 +5,38 @@ import { Signup } from "./features/authentication/pages/Signup/Signup"
 import { ResetPassword } from "./features/authentication/pages/ResetPassword/ResetPassword"
 import { VerifyEmail } from "./features/authentication/pages/VerifyEmail/VerifyEmail"
 import { Layout } from "./features/authentication/components/Layout/Layout"
+import { AuthenticationContextProvider } from "./features/authentication/contexts/AuthenticationContextProvider"
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Layout />,
+    element: <AuthenticationContextProvider />,
     children: [
       {
-        path: "/login",
-        element: <Login />,
+        path: "/",
+        element: <Feed />,
       },
       {
-        path: "/signup",
-        element: <Signup />,
-      },
-      {
-        path: "/request-password-reset",
-        element: <ResetPassword />,
-      },
-      {
-        path: "/verify-email",
-        element: <VerifyEmail />,
+        element: <Layout />,
+        children: [
+          {
+            path: "/login",
+            element: <Login />,
+          },
+          {
+            path: "/signup",
+            element: <Signup />,
+          },
+          {
+            path: "/request-password-reset",
+            element: <ResetPassword />,
+          },
+          {
+            path: "/verify-email",
+            element: <VerifyEmail />,
+          },
+        ]
       },
     ]
-  },{
-    path: "/home",
-    element: <Feed />,
   }
 ])
 
