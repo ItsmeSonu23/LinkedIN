@@ -84,7 +84,7 @@ export const ResetPassword = () => {
             const newPassword = (e.currentTarget.newPassword as HTMLInputElement).value;
             await resetPassword(email, code, newPassword);
             setIsLoading(false);
-          }
+          }}
         >
           <p>Enter the verification code we sent to your email and your new password.</p>
           <Input type="text" label="Verification Code" />
