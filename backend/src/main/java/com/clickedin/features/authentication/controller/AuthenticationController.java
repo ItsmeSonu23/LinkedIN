@@ -34,10 +34,11 @@ public class AuthenticationController {
 
 
     @GetMapping("/user")
-    public AuthenticationUser getUser(@RequestAttribute("authenticatedUser")AuthenticationUser authenticationUser) {
+    public AuthenticationUser getUser(@RequestAttribute("authenticatedUser") AuthenticationUser authenticationUser) {
         return authenticationService.getUser(authenticationUser.getEmail());
     }
 
+    @PostMapping("/login")
     public AuthenticationResponseBody loginPage(@Valid @RequestBody AuthenticationRequestBody loginRequestBody){
         return authenticationService.login(loginRequestBody);
     }
@@ -55,7 +56,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/send-email-verification-token")
-    public String sendEmailVerificationToken(@RequestAttribute("authenticatedUser")AuthenticationUser user){
+    public String sendEmailVerificationToken(@RequestAttribute("authenticatedUser") AuthenticationUser user){
         authenticationService.sendEmailVerificationToken(user.getEmail());
         return "Email verification token sent successfully.";
     }

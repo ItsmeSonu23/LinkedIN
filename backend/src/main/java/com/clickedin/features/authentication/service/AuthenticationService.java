@@ -56,7 +56,7 @@ public class AuthenticationService {
             authenticationUserRepository.save(user.get());
             String subject = "Email Verification";
             String body = String.format("Only one step to take full advantage of CheckedIN. \n\n"
-                    + "Enter this code to verify your email : " + "%s\n\n" + "The code will expire in " + "%s"
+                    + "Enter this code to verify your email : " + "%s\n\n" + "The code will expire in " + "%d"
                     + " minutes.", emailVerificationToken, durationInMinutes);
 
             try {
@@ -102,9 +102,9 @@ public class AuthenticationService {
 
         String subject = "Email Verification";
         String body = String.format("""
-                Onle one step away to take full advantage of CheckedIn.
+                Only one step away to take full advantage of CheckedIn.
 
-                Enter this code to verify your email :  %s . The code will expire in % minutes.
+                Enter this code to verify your email :  %s . The code will expire in %d minutes.
                 """, emailVerificationToken, durationInMinutes);
 
         try {
