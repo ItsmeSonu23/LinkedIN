@@ -149,24 +149,42 @@ public class AuthenticationService {
                 logger.info("Error while sending email : {}", e.getMessage());
             }
 
-        }else{
+        } else {
             throw new IllegalArgumentException("User not found");
         }
     }
 
-
-    public void resetPassword(String email,String newPassword, String token){
-         Optional<AuthenticationUser> user = authenticationUserRepository.findByEmail(email);
-         if(user.isPresent() && encoder.matches(token, user.get().getPasswordResetToken()) && !user.get().getPasswordResetTokenExpiryDate().isBefore(LocalDateTime.now())){
+    public void resetPassword(String email, String newPassword, String token) {
+        Optional<AuthenticationUser> user = authenticationUserRepository.findByEmail(email);
+        if (user.isPresent() && encoder.matches(token, user.get().getPasswordResetToken())
+                && !user.get().getPasswordResetTokenExpiryDate().isBefore(LocalDateTime.now())) {
             user.get().setPasswordResetToken(null);
             user.get().setPasswordResetTokenExpiryDate(null);
             user.get().setPassword(encoder.encode(newPassword));
             authenticationUserRepository.save(user.get());
-         }else if(user.isPresent() && encoder.matches(token, user.get().getPasswordResetToken()) && user.get().getPasswordResetTokenExpiryDate().isBefore(LocalDateTime.now())){
+        } else if (user.isPresent() && encoder.matches(token, user.get().getPasswordResetToken())
+                && user.get().getPasswordResetTokenExpiryDate().isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("Password Reset token Expired.");
-         }else{
+        } else {
             throw new IllegalArgumentException("Password Reset token Fauled.");
-         }
+        }
+    }
+
+    public AuthenticationUser updateUserProfile(Long id, String firstName, String lastName, String company,
+            String position, String location) {
+        AuthenticationUser user = authenticationUserRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (firstName != null)
+            user.setFirstName(firstName);
+        if (lastName != null)
+            user.setLastName(lastName);
+        if (company != null)
+            user.setCompany(company);
+        if (position != null)
+            user.setPosition(position);
+        if (location != null)
+            user.setLocation(location);
+        return authenticationUserRepository.save(user);
     }
 
 }

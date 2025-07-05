@@ -35,10 +35,20 @@ public class AuthenticationUser {
     private String passwordResetToken=null;
     private LocalDateTime passwordResetTokenExpiryDate = null;
 
+    private String firstName;
+    private String lastName;
+    private String company;
+    private String position;
+    private String location;
+
+    private Boolean profileComplete;
     public AuthenticationUser(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
+    public void updateProfileCompleteStatus(){
+        this.profileComplete = (firstName != null && lastName != null && company != null && position != null && location != null);
+    }
     
 }
