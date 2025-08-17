@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/authentication")
+@RequestMapping("api/v1/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
