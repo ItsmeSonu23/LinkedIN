@@ -36,4 +36,28 @@ public class AuthenticationController {
     public AuthenticationResponseBody login(@Valid @RequestBody AuthenticationRequestBody loginRequestBody) throws UnsupportedEncodingException, MessagingException{
         return authenticationService.login(loginRequestBody);
     }
+
+    @PostMapping("/validate-email-verification-token")
+    public String verifyEmail(@RequestParam String token, @RequestAttribute("AuthenticatedUser") AuthenticationUser user){
+        authenticationService.validateEmailVerificationToken(token, user.getEmail());
+        return "Email verified Successfully!";
+    }
+
+    @GetMapping("/send-email-verification-token")
+    public String sendEmailVerificationToken(@RequestAttribute("AuthenticatedUser") AuthenticationUser user){
+        authenticationService.sendEmailVerificationToken(user.getEmail());
+        return "Email verification token sent Successfully!";
+    }
+
+    @GetMapping("/send-password-reset-token")
+    public String sendPasswordResetToken(@RequestParam String email){
+        authenticationService.sendPasswordResetToken(email);
+        return "Password reset token sent Successfully!";
+    }
+
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestParam String newPassword,@RequestParam String token, @RequestParam String email){
+        authenticationService.resetPassword(email, newPassword, token);
+        return "Password reset Successfully!";
+    }
 }

@@ -1,5 +1,7 @@
 package com.checked.backend.features.authentication.model;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -23,10 +25,13 @@ public class AuthenticationUser {
     @NotNull
     @Column(unique = true,nullable = false)
     private String email;
-    
+    private Boolean emailVerified= false;
+    private String emailVerificationToken = null;
+    private LocalDateTime emailVerificationTokenExpiryDate = null;
     @JsonIgnore
     private String password;
-
+    private String resetPasswordToken = null;
+    private LocalDateTime resetPasswordTokenExpiryDate = null;
     public AuthenticationUser(String email, String password) {
         this.email = email;
         this.password = password;
